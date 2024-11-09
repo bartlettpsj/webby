@@ -17,11 +17,13 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, click this to open")
-            Button("Open Playstation Store") {
+            Button("Open Playstation Store (US)") {
                 urlToShow = "https://direct.playstation.com/en-us/buy-consoles/playstation5-pro-console"
             }
-            WebView(url: (URL(string:urlToShow) ?? URL(filePath: "")))            .padding()
+            
+            
+            WebView(url: (URL(string:urlToShow) ?? URL(filePath: "")))
+                
         }
     }
 }
