@@ -19,6 +19,22 @@ struct WebView: UIViewRepresentable {
             let url = webView.url?.absoluteString
             print("\(Date()) Done loading \(url.unsafelyUnwrapped)")
         }
+                
+        func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+            print("\(Date()) Did terminate \(webView.url.unsafelyUnwrapped)")
+        }
+        
+        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+            print("\(Date()) Did fail \(webView.url.unsafelyUnwrapped)")
+        }
+        
+        func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+            print("\(Date()) Did commit \(webView.url.unsafelyUnwrapped)")
+        }
+        
+        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+            print("\(Date()) Did start provisional navigation \(webView.url.unsafelyUnwrapped)")
+        }
     }
         
     func makeCoordinator() -> Coordinator {
