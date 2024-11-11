@@ -14,7 +14,7 @@ struct WebView: UIViewRepresentable {
     var doSomething : (String) -> ()
 
     class Coordinator: NSObject, WKNavigationDelegate {
-            
+                   
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             let url = webView.url?.absoluteString
             print("\(Date()) Done loading \(url.unsafelyUnwrapped)")
@@ -33,8 +33,7 @@ struct WebView: UIViewRepresentable {
     func updateUIView(_ uiView: WKWebView, context: Context) {
         let request = URLRequest(url: url)
         uiView.navigationDelegate = context.coordinator
-//        print("\(Date()) Start loading \(url.absoluteString)")
+        print("\(Date()) Start loading \(url.absoluteString)")
         uiView.load(request)
-        DispatchQueue.main.async { self.doSomething("Start loading \(url.absoluteString)") }
     }
 }

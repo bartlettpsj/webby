@@ -8,6 +8,10 @@
 import SwiftUI
 import WebKit
 
+class ObservableViewModel: ObservableObject {
+    @Published var logText: String = ""
+}
+
 struct ContentView: View {
     
     @State var urlToShow = ""
@@ -16,9 +20,15 @@ struct ContentView: View {
     var list = ["Started logging..."]
     @State var listText = "Hello World\n"
     
+    @StateObject var viewModel: ObservableViewModel = ObservableViewModel()
+       
+    
     func doSomething(msg: String) {
                 
-//        print("\(Date())", msg)
+        
+        print("CHG \(Date())", msg)
+//        viewModel.logText = "Hello World"
+
 //        var list2 = list.map() { $0 }
 //        list2.append("\(Date()) \(msg))")
 //        list.append("sss");
@@ -60,10 +70,11 @@ struct ContentView: View {
         VStack {
             VStack {
                 
-                Image(systemName: "globe")
+                let a = Image(systemName: "globe")
                     .imageScale(.large)
                     .foregroundStyle(.tint)
                 
+                a
                 
                 TextField(text: $site, prompt: Text("Required")) {
                     Text("Site")
@@ -83,6 +94,11 @@ struct ContentView: View {
                 
                 TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: $listText, axis: .vertical)
                     .lineLimit(1...10)
+                                
+                 LogView(logText: "hello", viewModel: viewModel)
+                    .onReceive(viewModel.logText.publisher, perform: { _ in print("test") } )
+                        
+                    
             }
         }
     }
